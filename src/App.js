@@ -26,9 +26,9 @@ class App extends Component {
 
           <br />
           <Switch>
-            <Route path="/home" component={Content} exact />
-            <Route path="/read" component={Read} exact />
-            <Route path="/create" component={Create} exact />
+            <Route path="/home" component={Content} exact /> 
+            <Route path="/read" component={Read} exact /> 
+            <Route path="/create" component={Create} exact /> 
           </Switch>
         </div>
       </Router>
