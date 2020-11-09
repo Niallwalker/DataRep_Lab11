@@ -45,9 +45,9 @@ app.get('/api/movies', (req, res)=>{
 
 app.post('/api/movies', (req, res)=>{
     console.log('Movie Received!');
-    console.log(req.body.Title);
-    console.log(req.body.Year);
-    console.log(req.body.Poster);
+    console.log(req.body.title);
+    console.log(req.body.year);
+    console.log(req.body.poster);
 })
   app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
