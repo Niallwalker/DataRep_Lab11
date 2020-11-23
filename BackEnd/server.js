@@ -63,7 +63,7 @@ MovieModel.find((err, data)=>{
 })
 
 
-app.get('/api/movies/:id', (req,res)=>{
+app.get('/api/movies/:id/', (req, res)=>{
   console.log(req.params.id);
 
   MovieModel.findById(req.params.id, (err, data) =>{
@@ -71,7 +71,16 @@ app.get('/api/movies/:id', (req,res)=>{
   })
 })
 
+app.put('/api/movies/:id/', (req, res)=>{
+  console.log("Update Movie: "+req.params.id);
+  console.log(req.body);
 
+  MovieModel.findByIdAndUpdate(req.params.id,req.body, {new:true},
+    (err,data)=>{
+      res.send(data);
+    })
+
+})
 
 
 app.post('/api/movies', (req, res)=>{

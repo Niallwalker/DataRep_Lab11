@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import {Link} from 'react-router-dom';
 
 export class Movieitem extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export class Movieitem extends React.Component {
               </footer>
             </blockquote>
           </Card.Body>
+          <Link to={"/edit/"+ this.props.movie._id} className="btn btn-primary">Edit</Link> 
         </Card>
       </div>
     );
@@ -25,3 +27,4 @@ export class Movieitem extends React.Component {
 //imported bootstrap
 //added card bootstrap form
 //all under div
+//Edit button added
