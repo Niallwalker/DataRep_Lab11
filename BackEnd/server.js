@@ -4,6 +4,7 @@ const port = 4000
 const cors = require('cors');
 const bodyParser = require("body-parser"); //body parser install from last week
 const mongoose = require('mongoose'); //mongoose link
+const path = require('path');
 
 app.use(cors()); //cors added 
 app.use(function(req, res, next){
@@ -14,7 +15,8 @@ app.use(function(req, res, next){
     next();
 });
 
-
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -72,10 +74,10 @@ app.get('/api/movies/:id/', (req, res)=>{
 })
 
 app.put('/api/movies/:id/', (req, res)=>{
-  console.log("Update Movie: "+req.params.id);
+  console.log("Update Movie: "+req.params.id); //update component
   console.log(req.body);
 
-  MovieModel.findByIdAndUpdate(req.params.id,req.body, {new:true},
+  MovieModel.findByIdAndUpdate(req.params.id,req.body, {new:true}, //find by Id
     (err,data)=>{
       res.send(data);
     })
@@ -83,20 +85,20 @@ app.put('/api/movies/:id/', (req, res)=>{
 })
 
 app.delete('/api/movies/:id/', (req, res)=>{
-  console.log("Delete Movie: "+req.params.id);
+  console.log("Delete Movie: "+req.params.id); //delete component
 
-  MovieModel.findByIdAndDelete(req.params.id,(err, data)=>{
+  MovieModel.findByIdAndDelete(req.params.id,(err, data)=>{ //delete by Id
     res.send(data);
   })
 
 })
 
 
-app.post('/api/movies', (req, res)=>{
+app.post('/api/movies', (req, res)=>{ //movie details appear here  
     console.log('Movie Received!');
-    console.log(req.body.title);
-    console.log(req.body.year);
-    console.log(req.body.poster);
+    console.log(req.body.title); //movie title appears here
+    console.log(req.body.year); //movie title appears here
+    console.log(req.body.poster); //movie title appears here
 
     MovieModel.create({
       title: req.body.title,
@@ -105,6 +107,10 @@ app.post('/api/movies', (req, res)=>{
     })
 
     res.send('Item Added');
+})
+
+app.get('*', (req,res)=>{
+  res.sendFile(path.join(__dirname+'/../build/index.html'));
 })
 
   app.listen(port, () => {
